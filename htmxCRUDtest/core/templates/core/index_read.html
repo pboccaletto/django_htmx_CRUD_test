@@ -1,0 +1,34 @@
+<div class="modal is-active">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Read User: {{ user.name }} {{ user.surname }}</p>
+      <button type="button" class="delete modal_close" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <table class="table is-striped is-hoverable is-fullwidth">
+        <tr>
+          <th>ID</th>
+          <td>{{ user.id }}</td>
+        </tr>
+        <tr>
+          <th>Name</th>
+          <td>{{ user.name }}</td>
+        </tr>
+        <tr>
+          <th>Surname</th>
+          <td>{{ user.surename }}</td>
+        </tr>
+        <tr>
+          <th>Created At</th>
+          <td>{{ user.created_at }}</td>
+        </tr>
+      </table>
+    </section>
+    <footer class="modal-card-foot">
+      <div class="buttons">
+        <button class="button modal_close" type="button">Cancel</button>
+      </div>
+    </footer>
+  </div>
+</div>

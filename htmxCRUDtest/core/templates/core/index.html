@@ -1,0 +1,59 @@
+<html>
+<head>
+    <title>HTMX CRUD Test</title>
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+        >
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">HTMX CRUD TEST</h1>
+        <br>
+
+        <h3 class="subtitle">Users</h3>
+        <br>
+        <button class="button" hx-get="{% url 'index_create' %}" hx-trigger="click" hx-target="#modal" hx-swap="outerHTML">Create User</button>
+        <br>
+        <br>
+        {% if users %}
+        <table class="table is-striped is-hoverable is-fullwidth">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Actions</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.surename }}</td>
+                <td>
+                    <button class="button is-info" hx-get="{% url 'index_read' %}?id={{ user.id }}" hx-target="#modal" hx-swap="innerHTML">Read User</button>
+                    <button class="button is-warning" hx-get="{% url 'index_update' %}?id={{ user.id }}" hx-target="#modal" hx-swap="innerHTML">Update User</button>
+                    <button class="button is-danger" hx-get="{% url 'index_delete' %}?id={{user.id}}" hx-target="#modal" hx-swap="innerHTML">Delete User</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>No users found.</p>
+        {% endif %}
+
+        <div id="modal"></div>
+    </div>
+<script>
+    // Close modal when clicking outside of it
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('modal_close')) {
+            const modal = event.target.closest('.modal');
+            if (modal) {
+                modal.classList.remove('is-active');
+            }
+        }
+    });
+</script>
+</body>
+</html>

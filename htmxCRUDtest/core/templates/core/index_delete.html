@@ -1,0 +1,26 @@
+<div class="modal is-active">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">
+        Delete User {{ user.name }} {{ user.surname }}
+      </p>
+      <button type="button" class="delete modal_close" aria-label="close"></button>
+    </header>
+
+    <form action="{% url 'index_delete' %}" method="post">
+      <section class="modal-card-body">
+        {% csrf_token %}
+        <h4>Are you sure you want to delete this user?</h4>
+        <input type="hidden" name="id" value="{{ user.id }}">
+      </section>
+
+      <footer class="modal-card-foot">
+        <div class="buttons">
+          <button type="submit" class="button is-danger">Delete User</button>
+          <button class="button modal_close" type="button">Cancel</button>
+        </div>
+      </footer>
+    </form>
+  </div>
+</div>
